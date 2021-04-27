@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+
+[node name="Viewport" type="Viewport"]
+size = Vector2( 300, 600 )
+own_world = true
+
+[node name="icon" type="Sprite" parent="."]
+position = Vector2( 134.04, 200.202 )
+texture = ExtResource( 1 )

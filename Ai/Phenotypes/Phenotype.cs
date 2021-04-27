@@ -17,7 +17,13 @@ namespace Neat.Phenotypes
         List<Neuron> OutputNeurons;
         List<Neuron> HiddenNeurons;
 
+        public Dictionary<int, Godot.Vector2> neuronPos = new Dictionary<int, Godot.Vector2>();
+        public Dictionary<int, List<int>> synapsePos = new Dictionary<int, List<int>>();
+
         public int Id { get => id; set => id = value; }
+        public List<Neuron> hiddenNeurons { get => HiddenNeurons;}
+        public List<Neuron> outputNeurons { get => OutputNeurons;}
+        public List<Neuron> inputNeurons { get => InputNeurons;}
 
         public Phenotype(Genome genome, List<Synapse> synapses, List<Neuron> inputNeurons, List<Neuron> outputNeurons, List<Neuron> hiddenNeurons, Counter counter)
         {
@@ -34,6 +40,7 @@ namespace Neat.Phenotypes
 
             synapses.ForEach(AddSynapse);
             MakeConnections();
+            VisualiseNetwork();
             this.counter = counter;
         }
         private void MakeConnections()
@@ -387,12 +394,56 @@ namespace Neat.Phenotypes
             double[] output = new double[this.OutputNeurons.Count];
             for (int i = 0; i < this.OutputNeurons.Count; i++)
             {
-
                 output[i] = this.OutputNeurons[i].Forward();
             }
 
             return output;
-
         }
+
+        private void VisualiseNetwork()
+        {
+            Random rand = new Random();
+            Godot.Vector2 currentPos = new Godot.Vector2(0,0);
+            foreach (Neuron item in inputNeurons)
+            {
+                neuronPos.Add(key: item.GetId, currentPos);
+                currentPos += new Godot.Vector2(32, 0);
+            }
+            currentPos = new Godot.Vector2(0, -40);
+
+            foreach(Neuron item in hiddenNeurons)
+            {
+                neuronPos.Add(key: item.GetId, value: currentPos + new Godot.Vector2(rand.Next(0, inputNeurons.Count() * 32), 0));
+                currentPos += new Godot.Vector2(0, -32);
+            }
+
+            currentPos += new Godot.Vector2((inputNeurons.Count() * 32 - outputNeurons.Count() * 32) / 2, -50);
+            foreach(Neuron item in outputNeurons)
+            {
+                neuronPos.Add(item.GetId, currentPos);
+                currentPos += new Godot.Vector2(32, 0);
+            }
+
+            foreach (Synapse item in Synapses)
+            {
+                if (item.Enabled)
+                {
+                    if (synapsePos.ContainsKey(item.GetFrom))
+                    {
+                        // List<int> oldValues = synapsePos[item.GetFrom];
+                        // oldValues.Add(item.GetTo);
+                        synapsePos[item.GetFrom].Add(item.GetTo); 
+                    }
+                    else
+                    {
+                        synapsePos.Add(item.GetFrom, new List<int>(){item.GetTo});
+                        // synapsePos[item.GetFrom].Add(item.GetTo);
+                    }
+                }
+                
+            }
+        }
+        
     }
+
 }
