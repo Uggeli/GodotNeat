@@ -9,16 +9,17 @@ script = ExtResource( 1 )
 current = true
 
 [node name="label" type="RichTextLabel" parent="Camera2D"]
-visible = false
-margin_left = 166.0
-margin_top = -233.0
-margin_right = 460.0
-margin_bottom = 214.0
-text = "testi testi
-
-ewrerwe"
+margin_left = -507.0
+margin_top = -291.0
+margin_right = -317.0
+margin_bottom = -170.0
+text = "					Best of generation:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Pos" type="Position2D" parent="Camera2D"]
+position = Vector2( -337.714, -82.0925 )
+
 [node name="SpawnContainer" type="Node2D" parent="."]
+position = Vector2( -11.3461, 38.7103 )

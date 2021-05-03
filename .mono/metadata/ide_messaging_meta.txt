@@ -1,2 +1,2 @@
-﻿50714
-C:/Users/sakki/Desktop/Godot_v3.3-stable_mono_win64/Godot_v3.3-stable_mono_win64/Godot_v3.3-stable_mono_win64.exe
+﻿55169
+C:\Users\sakki\Desktop\Godot_v3.2.3-stable_mono_win64\Godot_v3.2.3-stable_mono_win64.exe

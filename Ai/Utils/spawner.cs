@@ -50,6 +50,7 @@ namespace Neat.Utils
                 ShootingEnemy new_spawn = mob.Instance() as ShootingEnemy;
                 new_spawn.Death += this.DeathEvent;
                 new_spawn.Position = new Vector2(rand.Next(10, 2000),rand.Next(10, 2000));
+                new_spawn.RotationDegrees = rand.Next(0, 360);
                 // new_spawn.Position = new Vector2(0, 0);
                 // new_spawn.AddBrain(kv.Key, this.target);
                 new_spawn.AddBrain(kv.Key);
